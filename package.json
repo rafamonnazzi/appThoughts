@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "pw2_etapa2"
+    "url": "pw2_etapa2_a"
   },
   "keywords": [
     "thoughts",
@@ -18,7 +18,7 @@
     "handlebars",
     "sequelize"
   ],
-  "author": "Gabriel Rodrigues",
+  "author": "Gustavo Afonso dos Santos",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
