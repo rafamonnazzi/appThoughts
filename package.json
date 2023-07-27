@@ -1,0 +1,37 @@
+{
+  "name": "appthoughts",
+  "version": "0.0.1",
+  "description": "thoughts mvc express handlebars sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "pw2_etapa2"
+  },
+  "keywords": [
+    "thoughts",
+    "mvc",
+    "express",
+    "handlebars",
+    "sequelize"
+  ],
+  "author": "Gabriel Rodrigues",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^5.3.3",
+    "express-session": "^1.17.2",
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.12",
+    "sequelize": "^6.6.5",
+    "session-file-store": "^1.5.0"
+  }
+}
