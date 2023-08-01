@@ -163,21 +163,21 @@ form input[type='submit']:hover,
 }
 
 /* CREATE / EDIT FORM */
-.thought-form-container a {
+.tought-form-container a {
   color: #f6982d;
 }
 
-.thought-form-container a:hover {
+.tought-form-container a:hover {
   color: #fff;
 }
 
-.thought-form-container h1 {
+.tought-form-container h1 {
   border-left: 4px solid #f6982d;
   padding: 10px;
   margin-top: 1em;
 }
 
-.thought-form-container form {
+.tought-form-container form {
   max-width: 30%;
   margin-top: 1.5em;
 }
@@ -260,20 +260,20 @@ form input[type='submit']:hover,
   color: #f6982d;
 }
 
-.thoughts-container figure {
+.toughts-container figure {
   border-bottom: 1px solid #333;
   padding: 0.5em;
   max-width: 50%;
   margin: 0 auto 1em;
 }
 
-.thoughts-container blockquote {
+.toughts-container blockquote {
   font-style: italic;
   font-size: 2em;
   margin-bottom: 0.4em;
 }
 
-.thoughts-container span {
+.toughts-container span {
   color: #f6982d;
 }
 
