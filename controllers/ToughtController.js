@@ -1,4 +1,4 @@
-const thought = require('../models/thought')
+const Tought = require('../models/Tought')
 const User = require('../models/User')
 
 const { Op } = require('sequelize')
@@ -11,45 +11,45 @@ module.exports = class ToughController {
       where: {
         id: userId,
       },
-      include: thought,
+      include: Tought,
       plain: true,
     })
 
-    const thoughts = user.thoughts.map((result) => result.dataValues)
+    const toughts = user.Toughts.map((result) => result.dataValues)
 
-    let emptythoughts = true
+    let emptyToughts = true
 
-    if (thoughts.length > 0) {
-      emptythoughts = false
+    if (toughts.length > 0) {
+      emptyToughts = false
     }
 
-    console.log(thoughts)
-    console.log(emptythoughts)
+    console.log(toughts)
+    console.log(emptyToughts)
 
-    res.render('thoughts/dashboard', { thoughts, emptythoughts })
+    res.render('toughts/dashboard', { toughts, emptyToughts })
   }
 
-  static createthought(req, res) {
-    res.render('thoughts/create')
+  static createTought(req, res) {
+    res.render('toughts/create')
   }
 
-  static createthoughtSave(req, res) {
-    const thought = {
+  static createToughtSave(req, res) {
+    const tought = {
       title: req.body.title,
       UserId: req.session.userid,
     }
 
-    thought.create(thought)
+    Tought.create(tought)
       .then(() => {
         req.flash('message', 'Pensamento criado com sucesso!')
         req.session.save(() => {
-          res.redirect('/thoughts/dashboard')
+          res.redirect('/toughts/dashboard')
         })
       })
       .catch((err) => console.log())
   }
 
-  static showthoughts(req, res) {
+  static showToughts(req, res) {
     console.log(req.query)
 
     // check if user is searching
@@ -68,7 +68,7 @@ module.exports = class ToughController {
       order = 'DESC'
     }
 
-    thought.findAll({
+    Tought.findAll({
       include: User,
       where: {
         title: { [Op.like]: `%${search}%` },
@@ -76,55 +76,55 @@ module.exports = class ToughController {
       order: [['createdAt', order]],
     })
       .then((data) => {
-        let thoughtsQty = data.length
+        let toughtsQty = data.length
 
-        if (thoughtsQty === 0) {
-          thoughtsQty = false
+        if (toughtsQty === 0) {
+          toughtsQty = false
         }
 
-        const thoughts = data.map((result) => result.get({ plain: true }))
+        const toughts = data.map((result) => result.get({ plain: true }))
 
-        res.render('thoughts/home', { thoughts, thoughtsQty, search })
+        res.render('toughts/home', { toughts, toughtsQty, search })
       })
       .catch((err) => console.log(err))
   }
 
-  static removethought(req, res) {
+  static removeTought(req, res) {
     const id = req.body.id
 
-    thought.destroy({ where: { id: id } })
+    Tought.destroy({ where: { id: id } })
       .then(() => {
         req.flash('message', 'Pensamento removido com sucesso!')
         req.session.save(() => {
-          res.redirect('/thoughts/dashboard')
+          res.redirect('/toughts/dashboard')
         })
       })
       .catch((err) => console.log())
   }
 
-  static updatethought(req, res) {
+  static updateTought(req, res) {
     const id = req.params.id
 
-    thought.findOne({ where: { id: id }, raw: true })
-      .then((thought) => {
-        res.render('thoughts/edit', { thought })
+    Tought.findOne({ where: { id: id }, raw: true })
+      .then((tought) => {
+        res.render('toughts/edit', { tought })
       })
       .catch((err) => console.log())
   }
 
-  static updatethoughtPost(req, res) {
+  static updateToughtPost(req, res) {
     const id = req.body.id
 
-    const thought = {
+    const tought = {
       title: req.body.title,
       description: req.body.description,
     }
 
-    thought.update(thought, { where: { id: id } })
+    Tought.update(tought, { where: { id: id } })
       .then(() => {
         req.flash('message', 'Pensamento atualizado com sucesso!')
         req.session.save(() => {
-          res.redirect('/thoughts/dashboard')
+          res.redirect('/toughts/dashboard')
         })
       })
       .catch((err) => console.log())
