@@ -1,8 +1,8 @@
 <div class="home-header">
     {{#if search}}
     <h1>Você está buscando por: <span>{{search}}</span></h1>
-        {{#if toughtsQty }}
-            <p>Foram encontrados <span>{{toughtsQty}}</span> pensamento(s)</p>
+        {{#if thoughtsQty }}
+            <p>Foram encontrados <span>{{thoughtsQty}}</span> pensamento(s)</p>
         {{else}}
             <p>Nenhum pensamento encontrado para o termo <span>{{search}}</span></p>
         {{/if}}
@@ -28,8 +28,8 @@
         <a href="/">Limpar</a>
     </div>
 </div>
-<div class="toughts-container">
-    {{#each toughts}}
+<div class="thoughts-container">
+    {{#each thoughts}}
         <figure>
             <blockquote>
                 "{{this.title}}"

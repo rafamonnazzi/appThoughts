@@ -9,12 +9,12 @@ const app = express();
 const conn = require("./db/conn");
 
 // Models
-const Tought = require("./models/Tought");
+const thought = require("./models/thought");
 
 // routes
-const toughtsRoutes = require("./routes/toughtsRoutes");
+const thoughtsRoutes = require("./routes/thoughtsRoutes");
 const authRoutes = require("./routes/authRoutes");
-const ToughController = require("./controllers/ToughtController");
+const ToughController = require("./controllers/thoughtController");
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
@@ -64,10 +64,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/toughts", toughtsRoutes);
+app.use("/thoughts", thoughtsRoutes);
 app.use("/", authRoutes);
 
-app.get("/", ToughController.showToughts);
+app.get("/", ToughController.showthoughts);
 
 conn
   .sync()
