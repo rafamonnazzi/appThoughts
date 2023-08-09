@@ -1,3 +1,4 @@
+const { get } = require('express/lib/response')
 const Thought = require('../models/Thought')
 const User = require('../models/User')
 
@@ -50,6 +51,16 @@ module.exports = class ThoughtController{
                 title:{[Op.like]:`%${search}%`},
             },
             order:[['createdAt',order]]
-        })
+        }).then((data) =>{
+            let thoughtsQty = data.length
+
+            if(thoughtsQty === 0){
+                thoughtsQty = false
+            }
+
+            const thoughts = data.map((result) => result.get({plain: true}))
+
+            res.render('thoughts/home',{thoughts, thoughtsQty, search})
+        }).catch((err) => console.error(err))
     }
 }

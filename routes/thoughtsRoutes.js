@@ -5,3 +5,6 @@ const ThoughtController = require('../controllers/ThoughtController')
 const checkAuth = require('../helpers/auth').checkAuth
 
 router.get('/dashboard', ThoughtController.dashboard)
+router.get('/', ThoughtController.showThoughts)
+
+module.exports = router
