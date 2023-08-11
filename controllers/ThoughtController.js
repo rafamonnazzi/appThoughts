@@ -1,8 +1,7 @@
-const { get } = require('express/lib/response')
 const Thought = require('../models/Thought')
 const User = require('../models/User')
 
-const { Op, or } = require('sequelize')
+const { Op } = require('sequelize')
 
 module.exports = class ThoughtController{
     static async dashboard(req, res){
@@ -62,5 +61,48 @@ module.exports = class ThoughtController{
 
             res.render('thoughts/home',{thoughts, thoughtsQty, search})
         }).catch((err) => console.error(err))
+    }
+
+    static createThought(req, res){
+        res.render('thoughts/create')
+    }
+
+    static createThoughtSave(req, res){
+        const thought = {
+            title: req.body.title,
+            UserId: req.session.userid
+        }
+
+        Thought.create(thought)
+        .then(() => {
+            req.flash('message','Pensamento foi criado com sucesso.')
+            req.session.save(() =>{
+                res.redirect('/thoughts/dashboard')
+            })
+        })
+        .catch((err) => console.log(err))
+    }
+
+    static removeThought(req, res){
+        const id = req.body.id
+
+        Thought.destroy({where: {id:id}})
+        .then(() => {
+            req.flash('message','Pensamento Excluido com Sucesso.')
+            req.session.save(() =>{
+                res.redirect('/thoughts/dashboard')
+            })
+        })
+        .catch((err) => console.log(err))
+    }
+
+    static updateThought(req, res){
+        const id = req.params.id
+
+        Thought.findOne({ where: {id:id}, raw: true})
+        .then((thought) => {
+            res.render('thoughts/edit',{thought})
+        })
+        .catch((err) => console.log(err))
     }
 }
