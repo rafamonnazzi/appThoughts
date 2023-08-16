@@ -105,4 +105,22 @@ module.exports = class ThoughtController{
         })
         .catch((err) => console.log(err))
     }
+    static updateThoughtPost(req, res){
+        const id = req.body.id
+
+        const thought = {
+            title: req.body.title,
+            description: req.body.description
+        }
+
+        Thought.update(thought, {where:{id: id}})
+        .then((thought) =>{
+            req.flash('message', 'pensamento alterado com sucesso!')
+            req.session.save(() =>{
+                res.render('thought/dashboard')
+            })
+        } )
+
+        .catch((err)=> console.error((err)))
+    }
 }
